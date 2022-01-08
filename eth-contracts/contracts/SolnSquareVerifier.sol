@@ -10,12 +10,6 @@ contract SolnSquareVerifier is  ERC721Mintable{
   using SafeMath for uint256;
   using Pairing for *;
 
-  struct Proof {
-      Pairing.G1Point a;
-      Pairing.G2Point b;
-      Pairing.G1Point c;
-  }
-
   Verifier private sqrVerifier;
 
   uint256 private max_index = 0;
@@ -53,11 +47,11 @@ contract SolnSquareVerifier is  ERC721Mintable{
 //  - make sure the solution is unique (has not been used before)
 //  - make sure you handle metadata as well as tokenSuplly
 
-function mint(Proof memory proof, uint[2] memory input,uint256 tokenID) onlyOwner public{
-  /*verify solution*/
-  //require(sqrVerifier.verifyTx(proof,input),"The trasaction was not verified!");
+/*function mint(Pairing.G1Point memory a,Pairing.G2Point memory b,Pairing.G1Point memory c, uint[2] memory input,uint256 tokenID) onlyOwner public{
+
+  //require(sqrVerifier.verifyTx({a:a,b:b,c:c},input),"The trasaction was not verified!");
 
   require(solution_map[tokenID].sol_address == address(0),"the token has been used!");
   super.mint(msg.sender, tokenID);
-}
+}*/
 }
