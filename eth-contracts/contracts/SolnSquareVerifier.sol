@@ -1,4 +1,5 @@
 pragma solidity >=0.4.21 <0.6.0;
+pragma experimental ABIEncoderV2;
 import 'openzeppelin-solidity/contracts/math/SafeMath.sol';
 // TODO define a contract call to the zokrates generated solidity contract <Verifier> or <renamedVerifier>
 import "./SquareVerifier.sol";
@@ -7,6 +8,13 @@ import "./ERC721Mintable.sol";
 // TODO define another contract named SolnSquareVerifier that inherits from your ERC721Mintable class
 contract SolnSquareVerifier is  ERC721Mintable{
   using SafeMath for uint256;
+  using Pairing for *;
+
+  struct Proof {
+      Pairing.G1Point a;
+      Pairing.G2Point b;
+      Pairing.G1Point c;
+  }
 
   Verifier private sqrVerifier;
 
@@ -41,16 +49,15 @@ contract SolnSquareVerifier is  ERC721Mintable{
     emit solution_add(tokenID, max_index, msg.sender);
   }
 
-
 // TODO Create a function to mint new NFT only after the solution has been verified
 //  - make sure the solution is unique (has not been used before)
 //  - make sure you handle metadata as well as tokenSuplly
-function mint(uint256 tokenID) onlyOwner public{
-  /*verify solution*/
 
+function mint(Proof memory proof, uint[2] memory input,uint256 tokenID) onlyOwner public{
+  /*verify solution*/
+  //require(sqrVerifier.verifyTx(proof,input),"The trasaction was not verified!");
 
   require(solution_map[tokenID].sol_address == address(0),"the token has been used!");
   super.mint(msg.sender, tokenID);
 }
-
 }
