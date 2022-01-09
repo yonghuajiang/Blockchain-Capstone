@@ -204,9 +204,8 @@ contract ERC721 is Pausable, ERC165 {
         return _operatorApprovals[owner][operator];
     }
 
-    function transferFrom(address from, address to, uint256 tokenId) public {
+    function transferFrom(address from, address to, uint256 tokenId) public{
         require(_isApprovedOrOwner(msg.sender, tokenId));
-
         _transferFrom(from, to, tokenId);
     }
 
@@ -246,8 +245,8 @@ contract ERC721 is Pausable, ERC165 {
     function _mint(address to, uint256 tokenId) internal {
 
         // TODO revert if given tokenId already exists or given address is invalid
-        require(!_exists(tokenId));
-        require(to != address(0));
+        require(!_exists(tokenId),"Token already exists");
+        require(to != address(0),"Invalid to address");
         // TODO mint tokenId to given address & increase token count of owner
         _tokenOwner[tokenId] = to;
         _ownedTokensCount[to].increment();
@@ -257,7 +256,7 @@ contract ERC721 is Pausable, ERC165 {
 
     // @dev Internal function to transfer ownership of a given token ID to another address.
     // TIP: remember the functions to use for Counters. you can refresh yourself with the link above
-    function _transferFrom(address from, address to, uint256 tokenId) internal {
+    function _transferFrom(address from, address to, uint256 tokenId) internal{
 
         // TODO: require from address is the owner of the given token
         require(from == ownerOf(tokenId),"The from address is not the owner");
@@ -540,7 +539,7 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 //      -calls the superclass mint and setTokenURI functions
 
 contract ERC721Mintable is ERC721Metadata("Galaxy","GLX","https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/") {
-  constructor () internal { }
+  constructor () public { }
 
   function mint(address to, uint256 tokenId) public onlyOwner returns(bool){
     super._mint(to, tokenId);

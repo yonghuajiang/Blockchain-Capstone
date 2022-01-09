@@ -1,3 +1,3 @@
-def main(private field base_value, field result_value) -> (field):
-  field verified = if base_value * base_value == result_value then 1 else 0 fi
-  return verified
+def main(private field baseValue, field resultValue) -> (field):
+  field result = if baseValue * baseValue == resultValue then 1 else 0 fi
+  return result

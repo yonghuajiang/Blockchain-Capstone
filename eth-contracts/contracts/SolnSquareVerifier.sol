@@ -1,57 +1,63 @@
 pragma solidity >=0.4.21 <0.6.0;
 pragma experimental ABIEncoderV2;
 import 'openzeppelin-solidity/contracts/math/SafeMath.sol';
-// TODO define a contract call to the zokrates generated solidity contract <Verifier> or <renamedVerifier>
-import "./SquareVerifier.sol";
 import "./ERC721Mintable.sol";
-
+// TODO define a contract call to the zokrates generated solidity contract <Verifier> or <renamedVerifier>
+import "./verifier.sol";
 // TODO define another contract named SolnSquareVerifier that inherits from your ERC721Mintable class
 contract SolnSquareVerifier is  ERC721Mintable{
   using SafeMath for uint256;
-  using Pairing for *;
+  Verifier public sqrVerifier;
 
-  Verifier private sqrVerifier;
-
-  uint256 private max_index = 0;
 // TODO define a solutions struct that can hold an index & an address
   struct solution {
-    uint256 sol_index;
-    address sol_address;
+    uint256 tokenId;
+    address tokenAddress;
 }
 // TODO define an array of the above struct
-  solution[] solutions;
+  solution[] private solutions;
 
-  constructor () internal{
-    sqrVerifier = new Verifier();
+  constructor (address verify_address) public{
+    sqrVerifier = Verifier(verify_address);
 
   }
 
 // TODO define a mapping to store unique solutions submitted
-  mapping(uint256 => solution) solution_map;
+  mapping(bytes32 => solution) private solution_map;
 
 
 // TODO Create an event to emit when a solution is added
-  event solution_add(uint256 tokenID, uint256 sol_index, address sol_address);
+  event solution_add(bytes32 solutionkey, uint256 tokenId, address tokenAddress);
 
 
 // TODO Create a function to add the solutions to the array and emit the event
-  function addSolution(uint256 tokenID) onlyOwner public{
-    max_index = max_index.add(1);
-    solution memory addedSolution = solution({sol_index:max_index, sol_address:msg.sender});
+  function addSolution(uint256 tokenId, address tokenAddress) onlyOwner public{
+    bytes32 solutionkey = keccak256(abi.encodePacked(tokenId, tokenAddress));
+    solution memory addedSolution = solution({tokenId:tokenId, tokenAddress:tokenAddress});
     solutions.push(addedSolution);
-    solution_map[tokenID] = addedSolution;
-    emit solution_add(tokenID, max_index, msg.sender);
+    solution_map[solutionkey] = addedSolution;
+    emit solution_add(solutionkey, tokenId, tokenAddress);
   }
 
-// TODO Create a function to mint new NFT only after the solution has been verified
-//  - make sure the solution is unique (has not been used before)
-//  - make sure you handle metadata as well as tokenSuplly
+  function totalSolution() public returns(uint256){
+    return solutions.length;
+  }
 
-/*function mint(Pairing.G1Point memory a,Pairing.G2Point memory b,Pairing.G1Point memory c, uint[2] memory input,uint256 tokenID) onlyOwner public{
+  // TODO Create a function to mint new NFT only after the solution has been verified
+  //  - make sure the solution is unique (has not been used before)
+  //  - make sure you handle metadata as well as tokenSuplly
 
-  //require(sqrVerifier.verifyTx({a:a,b:b,c:c},input),"The trasaction was not verified!");
+  function mint(uint256 tokenId,
+                address tokenAddress,
+                uint[2] memory a,
+                uint[2][2] memory b,
+                uint[2] memory c,
+                uint[2] memory input) onlyOwner public{
 
-  require(solution_map[tokenID].sol_address == address(0),"the token has been used!");
-  super.mint(msg.sender, tokenID);
-}*/
+  require(sqrVerifier.verifyTx(a,b,c,input),"The trasaction was not verified!");
+  bytes32 solutionkey = keccak256(abi.encodePacked(tokenId, tokenAddress));
+  require(solution_map[solutionkey].tokenAddress != address(0),strConcat("The solution has not been added:", uint2str(tokenId)));
+  super.mint(tokenAddress, tokenId);
+}
+
 }
