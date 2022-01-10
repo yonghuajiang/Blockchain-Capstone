@@ -1,5 +1,5 @@
 pragma solidity >=0.4.21 <0.6.0;
-pragma experimental ABIEncoderV2;
+
 import 'openzeppelin-solidity/contracts/math/SafeMath.sol';
 import "./ERC721Mintable.sol";
 // TODO define a contract call to the zokrates generated solidity contract <Verifier> or <renamedVerifier>
@@ -39,7 +39,7 @@ contract SolnSquareVerifier is  ERC721Mintable{
     emit solution_add(solutionkey, tokenId, tokenAddress);
   }
 
-  function totalSolution() public returns(uint256){
+  function totalSolution() public view returns(uint256){
     return solutions.length;
   }
 
