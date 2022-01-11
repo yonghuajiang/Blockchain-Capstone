@@ -1,4 +1,4 @@
-import SolnSquareVerifier from '../../build/contracts/SolnSquareVerifier.json';
+import SolnSquareVerifier from '../eth-contracts/build/contracts/SolnSquareVerifier.json';
 import Web3 from 'web3';
 
 export default class Contract {

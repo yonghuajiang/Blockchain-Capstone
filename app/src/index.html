@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <title>Real Estate ERC721 Token</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  </head>
+  <style>
+    input {
+      display: block;
+      margin-bottom: 12px;
+    }
+  </style>
+  <body>
+    <h1>Real Estate Token Mint</h1>
+
+    <hr>
+
+    <br>
+      <h1>Adding Solution</h1>
+      <br><label for="tokenID">Token ID</label><input type="text" id="tokenID"></input>
+      <br><label for="tokenAddress">Token Address</label><input type="text" id="tokenAddress"></input>
+      <br><br><button id="AddingSolution" onclick="App.addSolution()">Adding Solution</button>
+      <br>
+      <hr>
+      <br>
+      <h1>Mint Token</h1>
+      <br><label for="tokenIDmint">Token ID</label><input type="text" id="tokenIDmint"></input>
+      <br><label for="tokenAddressmint">Token Address</label><input type="text" id="tokenAddressMint"></input>
+      <br><br><button onclick="App.mint()">Mint Token</button>
+      <hr>
+      <br>
+      <span id="totalSupply"></span>
+      <br>
+    <script src="index.js"></script>
+  </body>
+</html>

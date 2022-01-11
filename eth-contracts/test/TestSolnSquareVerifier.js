@@ -2,7 +2,7 @@ var SolnSquareVerifier = artifacts.require('SolnSquareVerifier');
 var SquareVerifier = artifacts.require('Verifier');
 
 const fs = require('fs');
-proof = JSON.parse(fs.readFileSync("/home/yonghuajiang/Documents/Blockchain-Capstone/zokrates/code/proof.json"))
+proof = JSON.parse(fs.readFileSync("../zokrates/code/proof.json"))
 
 contract('SolnSquareVerifier', accounts => {
 
