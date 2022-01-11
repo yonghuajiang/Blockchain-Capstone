@@ -15,9 +15,18 @@ The capstone will build upon the knowledge you have gained in the course in orde
 
 
 # Process to test code
+  Passed all tests in Truffle test
+  Created App to access contract. The App is able to add solution and mint token. The total minted token number matched with expected number
+  All trasactions can be confirmed in Etherscan
+  Tokens were listed in OpenSea
+  Created a different Metamask wallet and tokens listed in OpenSea can be purchased by a different address
+  
+# OpenSea MarketPlace Storefront link's.
+  https://testnets.opensea.io/collection/galaxy-propertybeyondearth
 
 # Contract Addresses
   0x535D4d20251316076450bA9BEEb712f3844f74bB
+  
 # Contract Abi's
 [
   {
@@ -745,5 +754,4 @@ The capstone will build upon the knowledge you have gained in the course in orde
     "type": "function"
   }
 ]
-# OpenSea MarketPlace Storefront link's.
-https://testnets.opensea.io/collection/galaxy-propertybeyondearth
+
