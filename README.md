@@ -16,27 +16,34 @@ The capstone will build upon the knowledge you have gained in the course in orde
 
 # Process to test code
   Passed all tests in Truffle test<br />
-    .Run Ganache at port 7545;<br />
-    .In terminal, run truffle test test/TestERC721Mintable.js<br />
-      .File TestERC721Mintable.js was updated so that 4 tokens were minted from account_one and 6 tokens were minted from account_two<br />
-      .Tests check for: <br />
-        .total supply should be 10;<br />
-        .balance for account_two should be 6;<br />
-        .URI for token 1 should be https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/1<br />
-        .owner of token 1 was transfered from account_one to account_two;<br />
-        .Only contract owner can mint token;<br />
-      .All tests passed;<br />
-    .In terminal, run truffle test test/TestSquareVerifier.js;<br />
-      .proof was read from proof.json file;<br />
-      .Tests check for:<br />
-        .verifyTx returns true if the correct proof was used;<br />
-        .vefigyTx returns false if the proof was modified.<br />
-      .Both tests passed;<br />
-    .In terminal, run truffle test test/TestSolnSquareVerifier.js;<br />
-      .Tests check for:<br />
-        . After calling addSolution for 10 times, the total solutions increased by 10;<br />
-        . After minted 4 tokens, total supply increased by 4;<br />
-      .Both tests passed.        <br />
+    <ul>Run Ganache at port 7545;<br />
+  <li>In terminal, run truffle test test/TestERC721Mintable.js</li>
+  <ul style="list-style-type: lower-alpha; padding-bottom: 0;">
+  <li style="margin-left:2em">File TestERC721Mintable.js was updated so that 4 tokens were minted from account_one and 6 tokens were minted from account_two</li>
+  <li style="margin-left:2em">Tests check for: </li>
+  <ul>  
+  <li style="margin-left:2em">total supply should be 10;</li>
+  <li style="margin-left:2em">balance for account_two should be 6;</li>
+  <li style="margin-left:2em">URI for token 1 should be https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/1</li>
+  <li style="margin-left:2em">owner of token 1 was transfered from account_one to account_two;</li>
+  <li style="margin-left:2em">Only contract owner can mint token;</li>
+    </ul>
+  <li>All tests passed;</li>
+  </ul>
+    <li>In terminal, run truffle test test/TestSquareVerifier.js;</li>
+ <ul>    <li>proof was read from proof.json file;</li>
+     <li>Tests check for:</li>
+ <ul>       <li>verifyTx returns true if the correct proof was used;</li>
+        <li>vefigyTx returns false if the proof was modified.</li>
+   </ul>      <li>Both tests passed;</li>
+  </ul>
+  <ul>
+    <li>In terminal, run truffle test test/TestSolnSquareVerifier.js;</li>
+      <li>Tests check for:</li>
+ <ul>       <li>After calling addSolution for 10 times, the total solutions increased by 10;</li>
+        <li>After minted 4 tokens, total supply increased by 4;</li>
+ </ul>     <li>Both tests passed.        </li>
+  </ul>
   <br />
   Created App to access contract. <br />
     .The App is able to add solution and mint token. The total minted token number matched with expected number<br />
