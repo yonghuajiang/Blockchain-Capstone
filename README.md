@@ -16,9 +16,35 @@ The capstone will build upon the knowledge you have gained in the course in orde
 
 # Process to test code
   Passed all tests in Truffle test
-  Created App to access contract. The App is able to add solution and mint token. The total minted token number matched with expected number
+    .Run Ganache at port 7545;
+    .In terminal, run truffle test test/TestERC721Mintable.js
+      .File TestERC721Mintable.js was updated so that 4 tokens were minted from account_one and 6 tokens were minted from account_two
+      .Tests check for: 
+        .total supply should be 10;
+        .balance for account_two should be 6;
+        .URI for token 1 should be https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/1
+        .owner of token 1 was transfered from account_one to account_two;
+        .Only contract owner can mint token;
+      .All tests passed;
+    .In terminal, run truffle test test/TestSquareVerifier.js;
+      .proof was read from proof.json file;
+      .Tests check for:
+        .verifyTx returns true if the correct proof was used;
+        .vefigyTx returns false if the proof was modified.
+      .Both tests passed;
+    .In terminal, run truffle test test/TestSolnSquareVerifier.js;
+      .Tests check for:
+        . After calling addSolution for 10 times, the total solutions increased by 10;
+        . After minted 4 tokens, total supply increased by 4;
+      .Both tests passed.        
+  
+  Created App to access contract. 
+    .The App is able to add solution and mint token. The total minted token number matched with expected number
+    
   All trasactions can be confirmed in Etherscan
+  
   Tokens were listed in OpenSea
+  
   Created a different Metamask wallet and tokens listed in OpenSea can be purchased by a different address
   
 # OpenSea MarketPlace Storefront link's.
