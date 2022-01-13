@@ -49,6 +49,7 @@ The capstone will build upon the knowledge you have gained in the course in orde
       </ul>
       <li>Both tests passed.        </li>
     </ul>
+ </ul>
  
 ### Created App to access contract
   <ul>
